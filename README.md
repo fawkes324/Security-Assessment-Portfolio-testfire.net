@@ -49,8 +49,10 @@ The following issues were identified as systemic, requiring global configuration
     Missing Content Security Policy (CSP): The lack of a CSP header leaves the application vulnerable to script injection even if input validation is bypassed.
     Missing Anti-clickjacking Headers: Absence of X-Frame-Options or frame-ancestors across all endpoints.
 
-V. Strategic Recommendations for the SDLC
-    Shift Left: Integrate Veracode (SAST) into the early build phase to catch SQLi and XSS before they reach production.
-    Continuous Monitoring: Utilize Dynatrace to monitor for unusual latency spikes that may indicate automated injection or DDoS attempts.
-    Remediation Triage: Prioritize the SQL Injection fix immediately, followed by a global deployment of Security Headers (CSP, HSTS) to provide defense-in-depth.
-
+V.Mitigation
+SQL Injection: Use Parameterized Queries (Prepared Statements) to neutralize injection vectors.
+Reflected XSS: Apply Context-Aware Output Encoding to all user-supplied data.
+CSRF: Implement unique Anti-CSRF Tokens for every state-changing request.
+Clickjacking: Enforce the X-Frame-Options: SAMEORIGIN header to prevent UI redressing.
+Information Disclosure: Suppress Server Banners (e.g., Tomcat version) in global configurations.
+Missing CSP: Deploy a global Content-Security-Policy header to provide defense-in-depth.
